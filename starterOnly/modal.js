@@ -33,79 +33,116 @@ function closeModal() {
 
 // Vérification la validité du formulaire
 
+// check input value is at least 2 characters
 const checkValue = (value) => {
-  if (value.length < 2) {
+  if (value.trim().length < 2) {
     return false;
   }
   return true;
 }
 
+// check email content
 const validateEmail = (email) => {
   const mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  return String(email).toLowerCase().match(mailformat);
+  return String(email).trim().toLowerCase().match(mailformat);
 }
 
 const checkFirstname = () => {
-  console.log('toto')
   const firstNameElement = document.getElementById("first");
-  firstNameValue = firstNameElement.value;
-  if (!checkValue(firstNameValue)) {
-    alert("Valeur requise!");
+  let firstNameValue = firstNameElement.value;
+  let errorSpan = document.getElementById('error-firstname');
+  if (!firstNameValue) {
+    errorSpan.innerHTML = "Veuillez renseigner votre prénom.";
+    errorSpan.style.color = 'red';
+  } else if (!checkValue(firstNameValue)) {
+    errorSpan.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+    errorSpan.style.color = 'red';
+  } else {
+    errorSpan.innerHTML = "";
   }
 }
 
 const checkLastname = () => {
-  console.log('toto')
   const lastNameElement = document.getElementById("last");
-  lastNameValue = lastNameElement.value;
-  if (!checkValue(lastNameValue)) {
-    alert("Valeur requise!");
+  let lastNameValue = lastNameElement.value;
+  let errorSpan = document.getElementById('error-lastname');
+  if (!lastNameValue) {
+    errorSpan.innerHTML = "Veuillez renseigner votre nom.";
+    errorSpan.style.color = 'red';
+  } else if (!checkValue(lastNameValue)) {
+    errorSpan.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+    errorSpan.style.color = 'red';
+  } else {
+    errorSpan.innerHTML = "";
   }
 }
 
 const checkEMail = () => {
-  console.log('toto')
   const emailElement = document.getElementById("email");
-  emailValue = emailElement.value;
+  let emailValue = emailElement.value;
+  let errorSpan = document.getElementById('error-email');
   if (!validateEmail(emailValue)) {
-    alert("Email incorrect");
+    errorSpan.innerHTML = "Vous devez renseigner un email valide.";
+    errorSpan.style.color = 'red';
+  } else {
+    errorSpan.innerHTML = "";
   }
 }
 
-const checkNumber = () => {
-  console.log('toto')
+const checkBirthDate = () => {
+  const birthdateElement = document.getElementById("birthdate");
+  let birthdateValue = birthdateElement.value;
+  let errorSpan = document.getElementById('error-birthdate');
+  if (!(birthdateValue)) {
+    errorSpan.innerHTML = "Vous devez entrer votre date de naissance.";
+    errorSpan.style.color = 'red';
+  } else {
+    errorSpan.innerHTML = "";
+  }
+}
+
+
+const checkQuantity = () => {
   const quantityElement = document.getElementById("quantity");
-  quantityValue = quantityElement.value;
-  if (isNaN(quantityValue)) {
-    alert("Nombre incorrect");
+  let quantityValue = quantityElement.value;
+  let errorSpan = document.getElementById('error-quantity');
+  if (!(quantityValue)) {
+    errorSpan.innerHTML = "Vous devez renseigné le nombre de tournois auxquels vous avez participé.";
+    errorSpan.style.color = 'red';
+  } else {
+    errorSpan.innerHTML = "";
   }
 }
 
 const checkLocation = () => {
-  console.log('toto')
   const getSelectedValue = document.querySelector('input[name="location"]:checked');
+  let errorSpan = document.getElementById('error-location');
   if (getSelectedValue === null) {
-    alert("Il faut choisir une ville!");
+    errorSpan.innerHTML = "Vous devez choisir une option.";
+    errorSpan.style.color = 'red';
+  } else {
+    errorSpan.innerHTML = "";
   }
 }
 
 const checkTerms = () => {
-  console.log('toto')
+  let errorSpan = document.getElementById('error-checkbox');
   if (!document.getElementById("checkbox1").checked) {
-    alert("Vous devez acceptez les conditions")
+    errorSpan.innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions.";
+    errorSpan.style.color = 'red';
+  } else {
+    errorSpan.innerHTML = "";
   }
 }
 
-const validate = (e) => {
+let form = document.getElementById('form');
+form.addEventListener('submit', function (e) {
   e.preventDefault();
   checkFirstname();
   checkLastname();
   checkEMail();
-  checkNumber();
+  checkBirthDate();
+  checkQuantity();
   checkLocation();
   checkTerms();
-}
-
-const form = document.getElementsByName('reserve');
-console.log(form)
-form[0].addEventListener('submit', validate);
+});
