@@ -76,14 +76,14 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1005px) {
   .main-navbar {
     width: 100%;
     /* padding: 10px 0px; */
   }
 
   .topnav {
-    align-items: inherit;
+    /* align-items: inherit; */
   }
 
   .topnav a {
