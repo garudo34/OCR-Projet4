@@ -195,6 +195,8 @@ form.addEventListener('submit', function (e) {
     // afficher le message de validation du formulaire
     document.querySelector(".modal-body").style.display = "none";
     document.querySelector(".modal-confirmation").style.display = "block";
+    // on réinitialise le formulaire
+    form.reset();
   }
 });
 
