@@ -26,24 +26,21 @@ const modalCloseButton = document.querySelector(".close");
 // close modal event
 modalCloseButton.addEventListener("click", closeModal);
 
-// fonction de fermeture de la modal
-
 function closeModal() {
   modalbg.style.display = "none";
-  /* on s'assure que le formulaire réapparaisse après avoir fermé la modal 
-   une fois le formulaire validé pour ne pas rester sur le message de validation */
+
   document.querySelector(".modal-body").style.display = "block";
   document.querySelector(".modal-confirmation").style.display = "none";
 }
 
-// ISSUE 2 & 3
+// ISSUE 2 & 3 & 4
 
 // check if a field is not empty
 const isRequired = (value) => {
   return value === '' ? false : true;
 }
 
-// check if input value is at least 2 characters
+// check if an input value is at least 2 characters
 const checkValueLength = (value) => {
   return value.trim().length < 2 ? false : true;
 }
@@ -161,15 +158,15 @@ const checkTerms = () => {
 }
 
 const showError = (input, message) => {
-  // on récupère l'élèment parent de l'input (la div avec la classe formData)
+  // on récupère l'élèment parent de l'input
   const formField = input.parentElement;
-  // on affecte le message d'erreur en tant que data-attribute de l'element parent (le css se charge de l'afficher)
+  // on affecte le message d'erreur en tant que data-attribute de l'element parent, le css se charge de l'afficher
   formField.dataset.error = message;
   formField.dataset.errorVisible = true;
 };
 
 const showSuccess = (input) => {
-  // on récupère l'élèment parent de l'input (la div avec la classe formData)
+  // on récupère l'élèment parent de l'input
   const formField = input.parentElement;
   // on efface le message d'erreur
   formField.dataset.error = '';
@@ -230,7 +227,7 @@ form.addEventListener('input', function (e) {
       break;
   }
 
-  // si tous les champs sont correctement rempli, on donne l'accès au bouton de soumission
+  // si tous les champs sont correctement remplis, on donne l'accès au bouton de soumission
   let isFormValid = checkAllInput();
   if (isFormValid) {
     submitBtn.disabled = false;
