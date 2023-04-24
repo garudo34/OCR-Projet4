@@ -45,6 +45,10 @@ const checkValueLength = (value) => {
   return value.trim().length < 2 ? false : true;
 }
 
+const isNotNegative = (value) => {
+  return value >= 0 ? true : false;
+}
+
 // check email content
 const validateEmail = (email) => {
   const mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -121,7 +125,9 @@ const checkQuantity = () => {
   let quantityValue = quantityElement.value;
 
   if (!isRequired(quantityValue)) {
-    showError(quantityElement, "Vous devez renseigné le nombre de tournois auxquels vous avez participé.")
+    showError(quantityElement, "Vous devez renseigner le nombre de tournois auxquels vous avez participé.")
+  } else if (!isNotNegative(quantityValue)) {
+    showError(quantityElement, "Vous ne pouvez pas renseigner une valeur négative.")
   } else {
     showSuccess(quantityElement);
     valid = true;
@@ -248,6 +254,7 @@ const checkAllInput = () => {
     validateEmail(document.getElementById("email").value.trim()) &&
     isRequired(document.getElementById("birthdate").value) &&
     isRequired(document.getElementById("quantity").value) &&
+    isNotNegative(document.getElementById("quantity").value) &&
     document.querySelector('input[name="location"]:checked') &&
     document.querySelector('input[id="checkbox1"]:checked')
   ) {
